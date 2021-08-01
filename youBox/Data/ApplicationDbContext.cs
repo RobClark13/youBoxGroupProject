@@ -31,6 +31,7 @@ namespace youBox.Data
             }
             );
         }
-        public DbSet<youBox.Models.Subscriber> Subscribers { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<Employee>Employees { get; set; }
     }
 }

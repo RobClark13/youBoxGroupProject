@@ -10,23 +10,23 @@ using youBox.Models;
 
 namespace youBox.Controllers
 {
-    public class SubscribersController : Controller
+    public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SubscribersController(ApplicationDbContext context)
+        public EmployeesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Subscribers
+        // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Subscribers.Include(s => s.IdentityUser);
+            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Subscribers/Details/5
+        // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace youBox.Controllers
                 return NotFound();
             }
 
-            var subscriber = await _context.Subscribers
-                .Include(s => s.IdentityUser)
+            var employee = await _context.Employees
+                .Include(e => e.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (subscriber == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(subscriber);
+            return View(employee);
         }
 
-        // GET: Subscribers/Create
+        // GET: Employees/Create
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Subscribers/Create
+        // POST: Employees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,AddressLine1,AddressLine2,City,State,ZipCode,PhoneNumber,Package,IdentityUserId")] Subscriber subscriber)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(subscriber);
+                _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", subscriber.IdentityUserId);
-            return View(subscriber);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
+            return View(employee);
         }
 
-        // GET: Subscribers/Edit/5
+        // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace youBox.Controllers
                 return NotFound();
             }
 
-            var subscriber = await _context.Subscribers.FindAsync(id);
-            if (subscriber == null)
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", subscriber.IdentityUserId);
-            return View(subscriber);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
+            return View(employee);
         }
 
-        // POST: Subscribers/Edit/5
+        // POST: Employees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,AddressLine1,AddressLine2,City,State,ZipCode,PhoneNumber,Package,IdentityUserId")] Subscriber subscriber)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,IdentityUserId")] Employee employee)
         {
-            if (id != subscriber.Id)
+            if (id != employee.Id)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace youBox.Controllers
             {
                 try
                 {
-                    _context.Update(subscriber);
+                    _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubscriberExists(subscriber.Id))
+                    if (!EmployeeExists(employee.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace youBox.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", subscriber.IdentityUserId);
-            return View(subscriber);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
+            return View(employee);
         }
 
-        // GET: Subscribers/Delete/5
+        // GET: Employees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace youBox.Controllers
                 return NotFound();
             }
 
-            var subscriber = await _context.Subscribers
-                .Include(s => s.IdentityUser)
+            var employee = await _context.Employees
+                .Include(e => e.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (subscriber == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(subscriber);
+            return View(employee);
         }
 
-        // POST: Subscribers/Delete/5
+        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subscriber = await _context.Subscribers.FindAsync(id);
-            _context.Subscribers.Remove(subscriber);
+            var employee = await _context.Employees.FindAsync(id);
+            _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SubscriberExists(int id)
+        private bool EmployeeExists(int id)
         {
-            return _context.Subscribers.Any(e => e.Id == id);
+            return _context.Employees.Any(e => e.Id == id);
         }
     }
 }
