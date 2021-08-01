@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using youBox.Models;
 
 namespace youBox.Data
 {
@@ -30,5 +31,6 @@ namespace youBox.Data
             }
             );
         }
+        public DbSet<youBox.Models.Subscriber> Subscribers { get; set; }
     }
 }
