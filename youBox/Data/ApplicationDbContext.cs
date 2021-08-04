@@ -33,5 +33,6 @@ namespace youBox.Data
         }
         public DbSet<Subscriber> Subscribers { get; set; }
         public DbSet<Employee>Employees { get; set; }
+        public DbSet<ClothingSurvey> ClothingSurveys { get; set; }
     }
 }
