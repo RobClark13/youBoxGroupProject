@@ -156,5 +156,68 @@ namespace youBox.Controllers
         {
             return _context.Subscribers.Any(e => e.Id == id);
         }
+
+        public ActionResult ClothingSurvey (int id)
+        {
+            List<SelectListItem> Style = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Casual", Value="Casual"},
+                new SelectListItem {Text="Athletic", Value="Athletic"},
+                new SelectListItem {Text="Formal", Value="Formal"},
+            };
+            List<SelectListItem> Colors = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Dark", Value="Dark"},
+                new SelectListItem {Text="Blue", Value="Blue"},
+                new SelectListItem {Text="Orange", Value="Orange"},
+            };
+            List<SelectListItem> ShirtSize = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Small", Value="Small"},
+                new SelectListItem {Text="Medium", Value="Medium"},
+                new SelectListItem {Text="Large", Value="Large"},
+                 new SelectListItem {Text="Extra Large", Value="ExtraLarge"},
+            };
+            List<SelectListItem> PantSize = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Casual", Value="Casual"},
+                new SelectListItem {Text="Athletic", Value="Athletic"},
+                new SelectListItem {Text="Formal", Value="Formal"},
+            };
+            List<SelectListItem> Hats = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Yes", Value="Yes"},
+                new SelectListItem {Text="No", Value="No"},
+               
+            };
+            List<SelectListItem> Shorts = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Yes", Value="Yes"},
+                new SelectListItem {Text="No", Value="No"},
+                
+            };
+            List<SelectListItem> SecondaryStyle = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="Casual", Value="Casual"},
+                new SelectListItem {Text="Athletic", Value="Athletic"},
+                new SelectListItem {Text="Formal", Value="Formal"},
+            };
+            var survey = _context.ClothingSurveys.Where(s => s.SubscriberId == id).FirstOrDefault();
+            ViewBag.Style = Style;
+            ViewBag.Colors = Colors;
+            ViewBag.ShirtSize = ShirtSize;
+            ViewBag.PantSize = PantSize;
+            ViewBag.Hats = Hats;
+            ViewBag.Shorts = Shorts;
+            ViewBag.SecondaryStyle = SecondaryStyle;
+            return View(survey);
+        }
+        [HttpPost]
+        public ActionResult ClothingSurvey (ClothingSurvey clothingSurvey)
+        {
+            _context.ClothingSurveys.Update(clothingSurvey);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
