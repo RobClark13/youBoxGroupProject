@@ -13,38 +13,32 @@
         <form asp-action="ClothingSurvey">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Question1" class="control-label"></label>
-                <input asp-for="Question1" class="form-control" />
+                What is your normal style?
+                <select asp-for="Question1" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question2" class="control-label"></label>
-                <input asp-for="Question2" class="form-control" />
+                <select asp-for="Question2" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question3" class="control-label"></label>
-                <input asp-for="Question3" class="form-control" />
+                <select asp-for="Question3" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question3" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question4" class="control-label"></label>
-                <input asp-for="Question4" class="form-control" />
+                <select asp-for="Question4" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question4" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question5" class="control-label"></label>
-                <input asp-for="Question5" class="form-control" />
+                <select asp-for="Question5" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question5" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question6" class="control-label"></label>
-                <input asp-for="Question6" class="form-control" />
+                <select asp-for="Question6" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question6" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question7" class="control-label"></label>
-                <input asp-for="Question7" class="form-control" />
+                <select asp-for="Question7" class="form-control" asp-items="ViewBag.Style"></select>
                 <span asp-validation-for="Question7" class="text-danger"></span>
             </div>
             <div class="form-group">
